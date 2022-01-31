@@ -34,22 +34,44 @@ const main = async () => {
 
   const browser = await playwright.chromium.launch({ headless: false})
   const context = await browser.newContext({ viewport: null })
-  const page = await context.newPage()
+  // const page = await context.newPage()
 
-  // await page.goto('chrome://downloads')
-  await page.goto('https://www.powerlanguage.co.uk/wordle/')
+  // // await page.goto('chrome://downloads')
+  // await page.goto('https://www.powerlanguage.co.uk/wordle/')
 
-  await page.waitForSelector('#game', {timeout: 750})
-  await new Promise(resolve => setTimeout(resolve, 750))   
+  // await page.waitForSelector('#game', {timeout: 750})
+  // await new Promise(resolve => setTimeout(resolve, 750))   
 
-  // close modal
-  await page.click('.close-icon');
+  // // close modal
+  // await page.click('.close-icon');
 
-  // get the keyboard
-  await page.focus('#keyboard');
-  // enter the day's word and submit
-  await page.keyboard.type(wordToday);
-  await page.keyboard.press('Enter');
+  // // get the keyboard
+  // await page.focus('#keyboard');
+  // // enter the day's word and submit
+  // await page.keyboard.type(wordToday);
+  // await page.keyboard.press('Enter');
+  // // copies share
+  // await page.click('#share-button');
+
+  // opens twitter
+  const newPage = await context.newPage()
+  await newPage.goto('https://twitter.com/')
+  // sign in
+  await newPage.click(`[data-testid="loginButton"]`);
+  // enter username
+  await newPage.click(`[autocapitalize="sentences"]`);
+  await newPage.keyboard.type('')
+  await newPage.keyboard.press('Enter');
+  // enter password
+  await newPage.click(`[name="password"]`);
+  await newPage.keyboard.type('')
+  await newPage.keyboard.press('Enter');
+  // 
+  // let shit = navigator.clipboard.read();
+  await newPage.click('.DraftEditor-editorContainer')
+  await newPage.keyboard.press(shit);
+
+
 
 
   // await page.close()
