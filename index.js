@@ -30,21 +30,18 @@ let wordToday = getWordOfTheDay(today);
 
 // puppeteer shit
 const main = async () => {
-  await playwright.selectors.register('shadow', selectorEngine)
-
+	await playwright.selectors.register('shadow', selectorEngine)
+	
   const browser = await playwright.chromium.launch({ headless: false})
   const context = await browser.newContext({ viewport: null })
   const page = await context.newPage()
 
   // await page.goto('chrome://downloads')
   await page.goto('https://www.powerlanguage.co.uk/wordle/')
-
   await page.waitForSelector('#game', {timeout: 750})
   await new Promise(resolve => setTimeout(resolve, 750))   
-
   // close modal
   await page.click('.close-icon');
-
   // get the keyboard
   await page.focus('#keyboard');
   // enter the day's word and submit
